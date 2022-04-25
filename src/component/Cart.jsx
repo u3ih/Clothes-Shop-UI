@@ -15,6 +15,18 @@ const Cart = () => {
         dispatch(delCart(product));
     }
 
+    const caculatorTotalPriceEach = (product) => {
+        return Math.round(product.qty * product.price);
+    }
+
+    const caculatorTotalPrice = () => {
+        let total = 0;
+
+        products.forEach(product => total += caculatorTotalPriceEach(product))
+
+        return total
+    }
+
     return (
         <>
             {products.map(product => (
@@ -26,7 +38,7 @@ const Cart = () => {
                         <div className="col-md-4">
                             <h3>{product.title}</h3>
                             <p className="lead fw-bold">
-                                {product.qty} X {product.price} = {product.qty * product.price} VND
+                                {product.qty} X {product.price} = {caculatorTotalPriceEach(product)} VND
                             </p>
                             <button className="btn btn-outline-dark me-4" onClick={() => handleDelButton(product)}>
                                 <i className="fa fa-minus" />
@@ -38,6 +50,10 @@ const Cart = () => {
                     </div>
                 </div>
             ))}
+
+            <div className="container py-4">
+                <p><strong>Total amount: {caculatorTotalPrice()} VND</strong></p>
+            </div>
 
         </>
     )
