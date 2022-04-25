@@ -7,7 +7,6 @@ const Products = () => {
   const [filter, setFilter] = useState(data);
   const [loading, setLoading] = useState(false);
   let componentMounted = true;
-  console.log("products");
 
   useEffect(() => {
     const getProducts = async () => {
@@ -17,7 +16,6 @@ const Products = () => {
         setData(await response.clone().json());
         setFilter(await response.json());
         setLoading(false);
-        console.log(filter);
       }
       return () => {
         componentMounted = false;
@@ -85,8 +83,8 @@ const Products = () => {
         </div>
         {filter.map((product) => {
           return (
-            <>
-              <div className="col-md-3 mb-4">
+            <div className="col-md-3 mb-4" key={product.id}>
+
                 <div class="card h-100 text-center p-4" key={product.id}>
                   <img
                     src={product.image}
@@ -104,8 +102,8 @@ const Products = () => {
                     </NavLink>
                   </div>
                 </div>
-              </div>
-            </>
+            </div>
+
           );
         })}
       </>

@@ -8,15 +8,27 @@ import Cart from "./component/Cart";
 import Login from "./component/Login";
 import Register from "./component/Register";
 import ForgotPass from "./component/ForgotPass";
-// import { useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from "react";
+
+const pathWithoutHeader = ["/login", "/register", "/forgot-password"];
 
 function App() {
-  // const history = useHistory();
-  // console.log(history);
+  const location = useLocation();
+
+  const [withHeader, setWithHeader] = useState(true);
+
+  useEffect(() => {
+    console.log(location.pathname);
+    if(pathWithoutHeader.find(path => path === location.pathname)) {
+      setWithHeader(false);
+    }
+  }, [location.pathname])
+  
 
   return (
     <>
-      <Navbar />
+      {withHeader && <Navbar />}
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/products" element={<Products />} />
