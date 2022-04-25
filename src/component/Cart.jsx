@@ -51,8 +51,9 @@ const Cart = () => {
                 </div>
             ))}
 
-            <div className="container py-4">
+            <div className="container py-4 d-flex flex-column align-items-center">
                 <p><strong>Total amount: {caculatorTotalPrice()} VND</strong></p>
+                <button className="btn btn-outline-dark px-4 py-2 ">Payment</button>
             </div>
 
         </>
