@@ -8,7 +8,9 @@ import Cart from "./component/Cart";
 import Login from "./component/Login";
 import Register from "./component/Register";
 import ForgotPass from "./component/ForgotPass";
-import { useLocation } from 'react-router-dom';
+import Contact from "./component/Contact";
+import About from "./component/About";
+import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const pathWithoutHeader = ["/login", "/register", "/forgot-password"];
@@ -20,11 +22,10 @@ function App() {
 
   useEffect(() => {
     console.log(location.pathname);
-    if(pathWithoutHeader.find(path => path === location.pathname)) {
+    if (pathWithoutHeader.find((path) => path === location.pathname)) {
       setWithHeader(false);
     }
-  }, [location.pathname])
-  
+  }, [location.pathname]);
 
   return (
     <>
@@ -37,6 +38,8 @@ function App() {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/forgot-pass" element={<ForgotPass />} />
+        <Route exact path="/about" element={<About />} />
+        <Route exact path="/contact" element={<Contact />} />
       </Routes>
     </>
   );
