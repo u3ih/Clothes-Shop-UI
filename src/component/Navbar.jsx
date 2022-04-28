@@ -4,14 +4,13 @@ import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const state = useSelector((state) => state.handleCart);
-  console.log(state);
 
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light bg-white py-3 shadow-sm">
         <div className="container">
           <NavLink className="navbar-brand fw-bold fs-4" to="#">
-            CoolMake
+            ClothesBlue
           </NavLink>
           <button
             className="navbar-toggler"

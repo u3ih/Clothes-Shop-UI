@@ -1,27 +1,24 @@
 import React, { useState, useEffect } from "react";
 import Skeleton from "react-loading-skeleton";
 import { NavLink } from "react-router-dom";
+import { getProducts } from "../fetch_API/product";
 
 const Products = () => {
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState(data);
   const [loading, setLoading] = useState(false);
-  let componentMounted = true;
 
   useEffect(() => {
-    const getProducts = async () => {
+    const handleGet = async () => {
       setLoading(true);
-      const response = await fetch("https://fakestoreapi.com/products");
-      if (componentMounted) {
-        setData(await response.clone().json());
-        setFilter(await response.json());
-        setLoading(false);
-      }
-      return () => {
-        componentMounted = false;
-      };
-    };
-    getProducts();
+      const response = await getProducts();
+      console.log(response.data);
+      setData(response.data);
+      setFilter(response.data);
+      setLoading(false);
+
+    }
+    handleGet();
   }, []);
   const Loading = () => {
     return (
@@ -85,23 +82,23 @@ const Products = () => {
           return (
             <div className="col-md-3 mb-4" key={product.id}>
 
-                <div class="card h-100 text-center p-4" key={product.id}>
-                  <img
-                    src={product.image}
-                    class="card-img-top"
-                    alt={product.title}
-                    height="250px"
-                  />
-                  <div class="card-body">
-                    <h5 class="card-title fw-bold">
-                      {product.title.substring(0, 12)}...
-                    </h5>
-                    <p class="card-text lead fw-bold">${product.price}</p>
-                    <NavLink to={`/products/${product.id}`} class="btn btn-outline-dark">
-                      Buy now
-                    </NavLink>
-                  </div>
+              <div class="card h-100 text-center p-4" key={product.id}>
+                <img
+                  src={product.image}
+                  class="card-img-top"
+                  alt={product.title}
+                  height="250px"
+                />
+                <div class="card-body">
+                  <h5 class="card-title fw-bold">
+                    {product.title.substring(0, 12)}...
+                  </h5>
+                  <p class="card-text lead fw-bold">${product.price}</p>
+                  <NavLink to={`/products/${product.id}`} class="btn btn-outline-dark">
+                    Buy now
+                  </NavLink>
                 </div>
+              </div>
             </div>
 
           );

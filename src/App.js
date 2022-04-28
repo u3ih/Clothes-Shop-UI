@@ -21,7 +21,6 @@ function App() {
   const [withHeader, setWithHeader] = useState(true);
 
   useEffect(() => {
-    console.log(location.pathname);
     if (pathWithoutHeader.find((path) => path === location.pathname)) {
       setWithHeader(false);
     }

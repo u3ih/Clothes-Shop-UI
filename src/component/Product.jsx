@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react"
 import Skeleton from "react-loading-skeleton";
 import { useParams } from 'react-router';
 import { NavLink } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addCart } from "../redux/action";
+import { getProduct } from "../fetch_API/product";
 
 const Product = () => {
 
@@ -13,18 +14,18 @@ const Product = () => {
 
     const dispatch = useDispatch();
 
-    const addProduct = (product) => {
+    const addProductToCart = (product) => {
         dispatch(addCart(product));
     }
 
     useEffect(() => {
-        const getProduct = async () => {
+        const handleGetProduct = async () => {
             setLoading(true);
-            const respone = await fetch(`https://fakestoreapi.com/products/${id}`);
-            setProduct(await respone.json());
+            const respone = await getProduct(id);
+            setProduct(respone.data);
             setLoading(false);
         }
-        getProduct();
+        handleGetProduct();
     }, [id])
 
     const Loading = () => {
@@ -65,7 +66,7 @@ const Product = () => {
                     <p className="lead">{product.description}</p>
                     <button
                         className="btn btn-outline-dark px-4 py-2"
-                        onClick={() => addProduct(product)}
+                        onClick={() => addProductToCart(product)}
                     >
                         Add to cart
                     </button>

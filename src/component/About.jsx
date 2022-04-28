@@ -26,7 +26,7 @@ const About = () => {
             </div>
             <div class="col-lg-8">
               <p className="title-about">
-                CoolMake is a E-commerce project about a clothes shopping for
+                ClothesBlue is a E-commerce project about a clothes shopping for
                 men and women. This project is built by the members of 4th team.
               </p>
               <img src="images/about/sign.png" alt="" class="img-fluid" />
